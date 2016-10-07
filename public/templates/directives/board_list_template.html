@@ -1,0 +1,16 @@
+
+<h4 class="text-md-center" ng-hide="editingListTitle" ng-click="editingListTitle = true; cancelDescriptionEdit()">{{ list.title }}</h1>
+<form name="listTitleForm" ng-show="editingListTitle" ng-submit="editList()">
+  <input type="text" ng-model="updateList.title" name="ListTitle" required>
+  <input type="submit" class="btn btn-primary btn-sm" ng-disabled="listTitleForm.$invalid">
+  <a href="" ng-click="cancelTitleEdit()">Cancel</a>
+</form>
+<p ng-hide="editingListDescription" ng-click="editingListDescription = true; cancelTitleEdit()">{{ list.description }}</p>
+<form name="listDescriptionForm" ng-show="editingListDescription" ng-submit="editList()">
+  <input type="text" ng-model="updateList.description" name="listDescription" required>
+  <input type="submit" class="btn btn-primary btn-sm" ng-disabled="listDescriptionForm.$invalid">
+  <a href="" ng-click="cancelDescriptionEdit()">Cancel</a>
+</form>
+<list-card class="col-md-10 offset-md-1 card-box" ng-repeat="card in cards[list.id]" card="card"></list-card>
+<a href="">Add a Card</a>
+<a href="" ng-click="deleteList()">Delete List</a>

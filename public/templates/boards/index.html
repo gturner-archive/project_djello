@@ -1,0 +1,15 @@
+<div class="row board-header row-horizon">
+  <div class="col-md-3 board-box" ng-repeat="board in allBoards">
+    <a ui-sref="boards.show({id: board.id})"><h4 class="text-md-center">{{ board.title }}</h4></a>
+    <div class="list-in-board-box" ng-repeat="list in allLists[board.id]">
+      <h6>{{ list.title }}</h6>
+      <p>{{ list.description }}</p>
+    </div>
+  </div>
+  <div class="col-md-3 board-box">
+    <form name="boardForm" ng-submit="createBoard()">
+      <input class="form-control" type="text" name="boardTitle" placeholder="Create a new board!" ng-model="newBoard.title" required>
+      <input class="btn btn-primary col-md-4 offset-md-4" ng-disabled="boardForm.$invalid" type="submit">
+    </form>
+  </div>
+</div>

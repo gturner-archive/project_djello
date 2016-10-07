@@ -13,6 +13,42 @@ Djello.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider',
     RestangularProvider.setBaseUrl('/api/v1');
     RestangularProvider.setRequestSuffix('.json');
 
+    //Sets route on unrecongized path
+    $urlRouterProvider.otherwise('/boards');
+
+    $stateProvider
+      .state('boards', {
+        url: '/boards',
+        template: '<div class="container" ui-view></div>',
+        abstract: true,
+        resolve: {
+          boards: ['BoardsService', function(BoardsService) {
+            return BoardsService.getBoards();
+          }],
+
+          lists: ['ListsService', 'boards', function(ListsService, boards) {
+            return ListsService.getLists();
+          }],
+          cards: ['CardsService', function(CardsService) {
+            return CardsService.getCards();
+          }]
+        }
+      })
+      .state('boards.index', {
+        url: '',
+        templateUrl: '/templates/boards/index.html',
+        controller: 'BoardsIndexCtrl'
+      })
+      .state('boards.show', {
+        url: '/:id',
+        templateUrl: '/templates/boards/show.html',
+        controller: 'BoardsShowCtrl',
+        resolve: {
+          currentBoard: ['boards','$stateParams', 'BoardsService', function(boards, $stateParams, BoardsService) {
+            return BoardsService.find($stateParams.id)
+          }]
+        }
+      })
 
 
 

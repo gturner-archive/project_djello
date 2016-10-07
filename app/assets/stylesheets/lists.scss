@@ -1,0 +1,11 @@
+.list-box {
+  margin-top: 20px;
+  border: 1px solid black;
+  & > h4 {
+    margin-top: 10px;
+  }
+  & > p {
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+  }
+}
