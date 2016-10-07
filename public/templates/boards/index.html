@@ -6,6 +6,13 @@
       <p>{{ list.description }}</p>
     </div>
   </div>
+
+  <div class="col-md-3 board-box">
+    <h4 class="text-md-center">Subscribed Cards</h1>
+    <p>Here are all of the cards you are a member of</p>
+    <list-card class="col-md-10 offset-md-1 card-box" ng-repeat="card in subscriptions" card="card" ng-click="showModal(card)"></list-card>
+  </div>
+
   <div class="col-md-3 board-box">
     <form name="boardForm" ng-submit="createBoard()">
       <input class="form-control" type="text" name="boardTitle" placeholder="Create a new board!" ng-model="newBoard.title" required>

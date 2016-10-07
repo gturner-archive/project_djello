@@ -1,4 +1,6 @@
-Djello.directive('boardList', ['_', 'ListsService', 'CardsService', function(_, ListsService, CardsService) {
+Djello.directive('boardList',
+['_', 'ListsService', 'CardsService', 'ModalService', 'MembersService',
+function(_, ListsService, CardsService, ModalService, MembersService) {
 
   return {
     restrict: 'E',
@@ -10,6 +12,7 @@ Djello.directive('boardList', ['_', 'ListsService', 'CardsService', function(_, 
 
       scope.cards = CardsService.getCards();
       scope.updateList = {}
+      scope.newCard = {}
       scope.updateList.title = scope.list.title
       scope.updateList.description = scope.list.description
 
@@ -33,6 +36,38 @@ Djello.directive('boardList', ['_', 'ListsService', 'CardsService', function(_, 
       scope.cancelDescriptionEdit = function() {
         scope.editingListDescription = false;
         scope.updateList.description = scope.list.description
+      }
+
+      scope.cancelNewCard = function() {
+        scope.newCard = {};
+        scope.creatingCard = false;
+      }
+
+      scope.createCard = function() {
+        scope.newCard.list_id = scope.list.id;
+        CardsService.create(scope.newCard)
+          .then(function() {
+            scope.newCard = {};
+            scope.creatingCard = false;
+          })
+      }
+
+      scope.showModal = function(card) {
+        ModalService.showModal({
+          templateUrl: "/templates/cards/show.html",
+          controller: "CardsShowCtrl",
+          inputs: {
+            card: card,
+            members: MembersService.getMembers(card.id)
+          }
+        }).then(function(modal) {
+
+          //it's a bootstrap element, use 'modal' to show it
+          modal.element.modal();
+          modal.close.then(function(result) {
+            console.log(result);
+          });
+        });
       }
     }
   }

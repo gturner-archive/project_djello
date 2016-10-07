@@ -11,6 +11,11 @@
   <input type="submit" class="btn btn-primary btn-sm" ng-disabled="listDescriptionForm.$invalid">
   <a href="" ng-click="cancelDescriptionEdit()">Cancel</a>
 </form>
-<list-card class="col-md-10 offset-md-1 card-box" ng-repeat="card in cards[list.id]" card="card"></list-card>
-<a href="">Add a Card</a>
+<list-card class="col-md-10 offset-md-1 card-box" ng-repeat="card in cards[list.id]" card="card" ng-click="showModal(card)"></list-card>
+<a href="" ng-click="creatingCard = true">Add a Card</a>
 <a href="" ng-click="deleteList()">Delete List</a>
+<form name="cardForm" ng-show="creatingCard" ng-submit="createCard()">
+  <input type="text" ng-model="newCard.title" name="cardTitle" placeholder="What's the title..." required>
+  <input type="submit" class="btn btn-primary btn-sm" ng-disabled="cardForm.$invalid">
+  <a href="" ng-click="cancelNewCard()">Cancel</a>
+</form>

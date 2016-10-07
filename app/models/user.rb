@@ -8,5 +8,7 @@ class User < ApplicationRecord
  has_many :boards, through: :boards_users
  has_many :lists, through: :boards
  has_many :cards, through: :lists
+ has_many :memberships
+ has_many :subscribed_cards, through: :memberships, source: :card
 
 end

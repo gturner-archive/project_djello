@@ -1,4 +1,5 @@
-var Djello = angular.module('Djello', ['ui.router', 'restangular'])
+var Djello = angular.module('Djello',
+['ui.router', 'restangular', 'angularModalService'])
 
 
 //Build lodash service for easy dependency injection
@@ -31,6 +32,9 @@ Djello.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider',
           }],
           cards: ['CardsService', function(CardsService) {
             return CardsService.getCards();
+          }],
+          users: ['UsersService', function(UsersService) {
+            return UsersService.getUsers();
           }]
         }
       })

@@ -1,5 +1,5 @@
 Djello.controller('BoardsShowCtrl',
-['$scope', 'boards', 'lists', 'currentBoard', 'BoardsService', '$state', 'ListsService',
+['$scope', 'boards', 'lists', 'currentBoard', 'BoardsService', '$state', 'ListsService', 
 function($scope, boards, lists, currentBoard, BoardsService, $state, ListsService) {
 
   $scope.currentBoard = currentBoard
@@ -44,7 +44,6 @@ function($scope, boards, lists, currentBoard, BoardsService, $state, ListsServic
     $scope.editingBoard = false;
     $scope.updateBoard.title = $scope.currentBoard.title
   }
-
 
 
 }]);

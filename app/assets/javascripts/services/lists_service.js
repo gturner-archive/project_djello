@@ -4,15 +4,17 @@ function(Restangular, _, BoardsService, $rootScope) {
 
   var _lists = {};
 
+  //FINISH MAKING LIST ARR
+
   var create = function(listParams) {
     return Restangular.all('lists').post(listParams)
       .then(function(list) {
-        addList(list)
+        _addList(list)
         $rootScope.$broadcast('list.change')
       })
   };
 
-  var addList = function(list) {
+  var _addList = function(list) {
     if (!_lists[list.board_id]) {
       _lists[list.board_id] = [];
     }
@@ -60,11 +62,24 @@ function(Restangular, _, BoardsService, $rootScope) {
     });
   }
 
+  var find = function(id) {
+    var match;
+    for (var listId in _lists) {
+      _lists[listId].forEach(function(listObj) {
+        if (listObj.id == id) {
+          match = listObj
+        }
+      })
+    }
+    return match;
+  };
+
   return {
     create: create,
     destroy: destroy,
     getLists: getLists,
-    update: update
+    update: update,
+    find: find
   }
 
 }]);

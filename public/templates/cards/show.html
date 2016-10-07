@@ -1,0 +1,39 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-md-center">{{ card.title }}</h4>
+        <p>In List <a href="">{{ findList(card.list_id).title }}</a></p>
+      </div>
+      <div class="modal-body">
+        <h6>Description</h6>
+        <p ng-hide="editingCard.description">{{ card.description }}</p>
+        <form name="editingCardDescription" ng-show="editingCard.description">
+          <textarea class="form-control" name="cardDescription" ng-model="updatedCard.description" required></textarea>
+        </form>
+        <a ng-click="editCard('description')" href="">{{  editingCard.description ? "Cancel" : "Edit Description" }}</a>
+        <button class="btn btn-primary btn-sm" ng-show="editingCard.description" ng-click="updateCard()">Save</button>
+      </div>
+      <div class="modal-body">
+        <h6>Members</h6>
+        <card-member ng-hide="editingCard.members" ng-repeat="member in members" member="member" card="card"></card-member>
+        <form name="editingCardMembers" ng-show="editingCard.members">
+          <select class="form-control" name="cardMembers" ng-model="updatedCard.members" required>
+            <option ng-repeat="user in users" ng-value="user.id">{{ user.username }}</option>
+          </select>
+        </form>
+        <a ng-click="editCard('members')" href="">{{  editingCard.members ? "Cancel" : "Edit Members" }}</a>
+        <button class="btn btn-primary btn-sm" ng-show="editingCard.members" ng-click="addMember()">Save</button>
+      </div>
+      <div class="modal-body">
+        <h6>Activities</h6>
+        <p>{{ card.description }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
