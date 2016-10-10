@@ -12,7 +12,7 @@ function($scope, boards, lists, currentBoard, BoardsService, $state, ListsServic
   $scope.currentBoardLists = [];
 
   $scope.$watch('currentBoard', function() {
-    if $scope.currentBoard !== null {
+    if ($scope.currentBoard !== null) {
       angular.copy(lists[$scope.currentBoard.id], $scope.currentBoardLists)
     }
   });
