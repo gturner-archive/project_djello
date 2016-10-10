@@ -1,5 +1,5 @@
 var Djello = angular.module('Djello',
-['ui.router', 'restangular', 'angularModalService'])
+['ui.router', 'restangular', 'angularModalService', 'Devise'])
 
 
 //Build lodash service for easy dependency injection

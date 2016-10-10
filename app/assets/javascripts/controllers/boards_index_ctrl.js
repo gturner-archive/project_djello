@@ -1,11 +1,10 @@
 Djello.controller('BoardsIndexCtrl',
-['$scope', 'boards', 'lists', 'BoardsService', 'SubscriptionsService', 'ModalService', 'MembersService',
-function($scope, boards, lists, BoardsService, SubscriptionsService, ModalService, MembersService) {
+['$scope', 'boards', 'lists', 'BoardsService', 'SubscriptionsService', 'ModalService', 'MembersService', 'ActivityService',
+function($scope, boards, lists, BoardsService, SubscriptionsService, ModalService, MembersService, ActivityService) {
 
   $scope.allBoards = boards;
   $scope.allLists = lists;
   SubscriptionsService.populateSubscriptions().then(function(subscriptions) {
-    console.log(subscriptions);
     $scope.subscriptions = subscriptions;
   })
 
@@ -22,7 +21,8 @@ function($scope, boards, lists, BoardsService, SubscriptionsService, ModalServic
       controller: "CardsShowCtrl",
       inputs: {
         card: card,
-        members: MembersService.getMembers(card.id)
+        members: MembersService.getMembers(card.id),
+        activities: ActivityService.getActivities(card.id)
       }
     }).then(function(modal) {
 

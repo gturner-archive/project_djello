@@ -1,5 +1,5 @@
 Djello.controller('BoardsShowCtrl',
-['$scope', 'boards', 'lists', 'currentBoard', 'BoardsService', '$state', 'ListsService', 
+['$scope', 'boards', 'lists', 'currentBoard', 'BoardsService', '$state', 'ListsService',
 function($scope, boards, lists, currentBoard, BoardsService, $state, ListsService) {
 
   $scope.currentBoard = currentBoard
@@ -12,7 +12,9 @@ function($scope, boards, lists, currentBoard, BoardsService, $state, ListsServic
   $scope.currentBoardLists = [];
 
   $scope.$watch('currentBoard', function() {
-    angular.copy(lists[$scope.currentBoard.id], $scope.currentBoardLists)
+    if $scope.currentBoard !== null {
+      angular.copy(lists[$scope.currentBoard.id], $scope.currentBoardLists)
+    }
   });
 
   $scope.deleteBoard = function() {
@@ -24,9 +26,10 @@ function($scope, boards, lists, currentBoard, BoardsService, $state, ListsServic
 
   $scope.createList = function() {
     $scope.newList.board_id = currentBoard.id
-    ListsService.create($scope.newList)
-    $scope.newList = {};
-    $scope.addingList = false;
+    ListsService.create($scope.newList).then(function() {
+      $scope.newList = {};
+      $scope.addingList = false;
+    })
   }
 
   $scope.$on('list.change', function() {

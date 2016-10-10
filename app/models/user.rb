@@ -10,5 +10,6 @@ class User < ApplicationRecord
  has_many :cards, through: :lists
  has_many :memberships
  has_many :subscribed_cards, through: :memberships, source: :card
+ has_many :activities
 
 end

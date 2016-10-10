@@ -1,21 +1,30 @@
 
-<h4 class="text-md-center" ng-hide="editingListTitle" ng-click="editingListTitle = true; cancelDescriptionEdit()">{{ list.title }}</h1>
-<form name="listTitleForm" ng-show="editingListTitle" ng-submit="editList()">
-  <input type="text" ng-model="updateList.title" name="ListTitle" required>
-  <input type="submit" class="btn btn-primary btn-sm" ng-disabled="listTitleForm.$invalid">
-  <a href="" ng-click="cancelTitleEdit()">Cancel</a>
-</form>
-<p ng-hide="editingListDescription" ng-click="editingListDescription = true; cancelTitleEdit()">{{ list.description }}</p>
-<form name="listDescriptionForm" ng-show="editingListDescription" ng-submit="editList()">
-  <input type="text" ng-model="updateList.description" name="listDescription" required>
-  <input type="submit" class="btn btn-primary btn-sm" ng-disabled="listDescriptionForm.$invalid">
-  <a href="" ng-click="cancelDescriptionEdit()">Cancel</a>
-</form>
-<list-card class="col-md-10 offset-md-1 card-box" ng-repeat="card in cards[list.id]" card="card" ng-click="showModal(card)"></list-card>
-<a href="" ng-click="creatingCard = true">Add a Card</a>
-<a href="" ng-click="deleteList()">Delete List</a>
-<form name="cardForm" ng-show="creatingCard" ng-submit="createCard()">
-  <input type="text" ng-model="newCard.title" name="cardTitle" placeholder="What's the title..." required>
-  <input type="submit" class="btn btn-primary btn-sm" ng-disabled="cardForm.$invalid">
-  <a href="" ng-click="cancelNewCard()">Cancel</a>
-</form>
+
+<h4 class="text-md-center card-header" ng-hide="editingListTitle" ng-click="editingListTitle = true; cancelDescriptionEdit()">{{ list.title }}</h1>
+<div class="card-header" ng-show="editingListTitle">
+  <form name="listTitleForm"  ng-submit="editList()">
+    <input class="form-control" type="text" ng-model="updateList.title" name="ListTitle" required>
+    <input type="submit" class="btn btn-primary btn-sm" ng-disabled="listTitleForm.$invalid">
+    <a class="btn btn-secondary pull-md-right btn-sm" href="" ng-click="cancelTitleEdit()">Cancel</a>
+  </form>
+</div>
+<div class="card-block">
+  <h6 class="card-title" ng-hide="editingListDescription" ng-click="editingListDescription = true; cancelTitleEdit()">{{ list.description }}</h6>
+  <div class="card-title" ng-show="editingListDescription">
+    <form name="listDescriptionForm" ng-submit="editList()">
+      <input class="form-control" type="text" ng-model="updateList.description" name="listDescription" required>
+      <input type="submit" class="btn btn-primary btn-sm" ng-disabled="listDescriptionForm.$invalid">
+      <a class="btn btn-secondary btn-sm pull-md-right" href="" ng-click="cancelDescriptionEdit()">Cancel</a>
+    </form>
+  </div>
+  <list-card class="col-md-10 offset-md-1 card card-block" ng-repeat="card in cards[list.id] | filter:{completed: false}" card="card" ng-click="showModal(card)"></list-card>
+  <a class="card-link" href="" ng-click="creatingCard = true">Add a Card</a>
+  <a class="card-link pull-md-right" href="" ng-click="deleteList()">Delete List</a>
+</div>
+<div ng-show="creatingCard" class="card-footer">
+  <form name="cardForm" ng-submit="createCard()">
+    <input class="form-control" type="text" ng-model="newCard.title" name="cardTitle" placeholder="What's the title..." required>
+    <input type="submit" class="btn btn-primary btn-sm" ng-disabled="cardForm.$invalid">
+    <a href="" class="btn btn-secondary btn-sm pull-md-right" ng-click="cancelNewCard()">Cancel</a>
+  </form>
+</div>

@@ -1,22 +1,28 @@
-<div class="row board-header row-horizon">
-  <div class="col-md-3 board-box" ng-repeat="board in allBoards">
-    <a ui-sref="boards.show({id: board.id})"><h4 class="text-md-center">{{ board.title }}</h4></a>
-    <div class="list-in-board-box" ng-repeat="list in allLists[board.id]">
-      <h6>{{ list.title }}</h6>
-      <p>{{ list.description }}</p>
+<div class="row row-horizon">
+  <div class="card" ng-repeat="board in allBoards">
+    <h4 class="card-header text-md-center"><a ui-sref="boards.show({id: board.id})">{{ board.title }}</a></h4>
+    <div class="card-block">
+      <div class="list-group">
+        <div class="list-group-item" ng-repeat="list in allLists[board.id]">
+          <h5 class="list-group-item-heading">{{ list.title }}</h5>
+          <p class="list-group-item-text">{{ list.description }}</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="col-md-3 board-box">
-    <h4 class="text-md-center">Subscribed Cards</h1>
-    <p>Here are all of the cards you are a member of</p>
-    <list-card class="col-md-10 offset-md-1 card-box" ng-repeat="card in subscriptions" card="card" ng-click="showModal(card)"></list-card>
+  <div class="card">
+    <h4 class="text-md-center card-header">Subscribed Cards</h1>
+    <div class="card-block">
+      <p class="card-text">Here are all of the cards you are a member of...</p>
+      <list-card class="col-md-10 offset-md-1 card card-block" ng-repeat="card in subscriptions | filter:{completed: false}" card="card" ng-click="showModal(card)"></list-card>
+    </div>
   </div>
 
-  <div class="col-md-3 board-box">
+  <div class="col-md-3 card card-block">
     <form name="boardForm" ng-submit="createBoard()">
       <input class="form-control" type="text" name="boardTitle" placeholder="Create a new board!" ng-model="newBoard.title" required>
-      <input class="btn btn-primary col-md-4 offset-md-4" ng-disabled="boardForm.$invalid" type="submit">
+      <input class="btn btn-primary col-md-6 offset-md-3" ng-disabled="boardForm.$invalid" type="submit">
     </form>
   </div>
 </div>

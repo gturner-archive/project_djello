@@ -1,15 +1,19 @@
 Djello.controller('CardsShowCtrl',
-['$scope', 'close', 'card', 'CardsService', 'ListsService', 'UsersService', 'members', 'MembersService',
-function($scope, close, card, CardsService, ListsService, UsersService, members, MembersService) {
+['$scope', 'close', 'card', 'CardsService', 'ListsService', 'UsersService', 'members', 'MembersService', 'Auth', 'activities',
+function($scope, close, card, CardsService, ListsService, UsersService, members, MembersService, Auth, activities) {
 
   $scope.card = card;
   $scope.editingCard = {}
   $scope.updatedCard = {}
-  $scope.users = UsersService.getUsers();
   members.then(function(members) {
     $scope.members = members
+    Auth.currentUser().then(function(user) {
+      $scope.users = MembersService.getNonMembers(card.id, user);
+    })
   })
-
+  activities.then(function(activities) {
+    $scope.activities = activities
+  })
 
   angular.copy(card, $scope.updatedCard)
 
@@ -43,6 +47,15 @@ function($scope, close, card, CardsService, ListsService, UsersService, members,
         $scope.editingCard = {};
         $scope.updatedCard.members = '';
       })
+  }
+
+  $scope.markCompleted = function() {
+    $scope.updatedCard.completed = true;
+    $scope.updateCard();
+  }
+
+  $scope.deleteCard = function() {
+    CardsService.deleteCard(card)
   }
 
 }]);

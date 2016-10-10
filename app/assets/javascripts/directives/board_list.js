@@ -1,6 +1,6 @@
 Djello.directive('boardList',
-['_', 'ListsService', 'CardsService', 'ModalService', 'MembersService',
-function(_, ListsService, CardsService, ModalService, MembersService) {
+['_', 'ListsService', 'CardsService', 'ModalService', 'MembersService', 'ActivityService',
+function(_, ListsService, CardsService, ModalService, MembersService, ActivityService) {
 
   return {
     restrict: 'E',
@@ -58,7 +58,8 @@ function(_, ListsService, CardsService, ModalService, MembersService) {
           controller: "CardsShowCtrl",
           inputs: {
             card: card,
-            members: MembersService.getMembers(card.id)
+            members: MembersService.getMembers(card.id),
+            activities: ActivityService.getActivities(card.id)
           }
         }).then(function(modal) {
 

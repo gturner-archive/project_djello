@@ -1,6 +1,7 @@
 Djello.factory('UsersService', ['Restangular', function(Restangular) {
 
   var _users = [];
+  var _availableUsers = {}
 
   var populateUsers = function() {
     return Restangular.all('users').getList().then(function(users) {
@@ -8,13 +9,13 @@ Djello.factory('UsersService', ['Restangular', function(Restangular) {
     })
   };
 
-  var getUsers = function() {
+  var getUsers = function(card) {
     if (_users.length) {
       return _users;
     } else {
       return populateUsers();
     }
-  }
+  };
 
   return {
     getUsers: getUsers

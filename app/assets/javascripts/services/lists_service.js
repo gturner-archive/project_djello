@@ -10,7 +10,7 @@ function(Restangular, _, BoardsService, $rootScope) {
     return Restangular.all('lists').post(listParams)
       .then(function(list) {
         _addList(list)
-        $rootScope.$broadcast('list.change')
+        return $rootScope.$broadcast('list.change')
       })
   };
 

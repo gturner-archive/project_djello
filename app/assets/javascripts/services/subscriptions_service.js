@@ -8,8 +8,28 @@ Djello.factory('SubscriptionsService', ['Restangular', function(Restangular) {
     });
   };
 
+  var updateSubscription = function(updatedCard) {
+    for (var i = 0; i < _subscriptions.length; i++) {
+      if (_subscriptions[i].id == updatedCard.id) {
+        angular.copy(updatedCard, _subscriptions[i])
+        break;
+      }
+    }
+  }
+
+  var deleteSubscription = function(deletedCard) {
+    for (var i = 0; i < _subscriptions.length; i++) {
+      if (_subscriptions[i].id === deletedCard.id) {
+        _subscriptions.splice(i, 1)
+        break;
+      }
+    }
+  }
+
   return {
-    populateSubscriptions: populateSubscriptions
+    populateSubscriptions: populateSubscriptions,
+    updateSubscription: updateSubscription,
+    deleteSubscription: deleteSubscription
   }
 
 }]);

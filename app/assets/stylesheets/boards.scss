@@ -1,33 +1,28 @@
 .board-header {
   margin-top: 20px;
-  .board-box {
-    border: 1px solid black;
-    h4 {
-      border-bottom: 1px solid black;
-    }
-    .list-in-board-box {
-      border: 1px solid black;
-    }
-  }
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
   .board-input {
     border: none;
-    border-bottom: 1px solid black;
-    font-size: 30px;
+    font-size: 2.5rem;
     &:focus {
       outline: none;
       border: none;
-      border-bottom: 1px solid black;
     }
   }
 }
 
-//I STOLE ALL OF THIS
+.card {
+  margin: 20px 20px;
+}
+
+
 .row-horizon {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
 }
-.row-horizon > [class*="col-lg"], .row-horizon > [class*="col-md"], .row-horizon > [class*="col-sm"], .row-horizon > [class*="col-xs"] {
+.row-horizon > [class*="col-lg"], .row-horizon > [class*="col-md"], .row-horizon > [class*="col-sm"], .row-horizon > [class*="card"] {
   float: none;
   display: inline-block;
   white-space: normal;
@@ -136,6 +131,9 @@
     width: 30%;
   }
   .row-horizon > .col-md-3 {
+    width: 22.5%;
+  }
+  .row-horizon > .card {
     width: 22.5%;
   }
   .row-horizon > .col-md-2 {
