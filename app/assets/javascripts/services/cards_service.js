@@ -1,4 +1,4 @@
-Djello.factory('CardsService', ['_', 'Restangular', '$rootScope', 'ActivityService', 'SubscriptionsService', function(_, Restangular, $rootScope, ActivityService, SubscriptionsService) {
+Djello.factory('CardsService', ['_', 'Restangular', '$rootScope', 'ActivityService', 'SubscriptionsService', '$q', function(_, Restangular, $rootScope, ActivityService, SubscriptionsService, $q) {
 
   var _cards = {};
 
@@ -12,6 +12,7 @@ Djello.factory('CardsService', ['_', 'Restangular', '$rootScope', 'ActivityServi
           }
           tempCards[card.list_id].push(card)
         })
+        console.log('called populate')
         return angular.copy(tempCards, _cards);
       })
   };
@@ -20,7 +21,9 @@ Djello.factory('CardsService', ['_', 'Restangular', '$rootScope', 'ActivityServi
     if (_.isEmpty(_cards)) {
       return populateCards();
     } else {
-      return _cards;
+      return $q(function(resolve) {
+        resolve(_cards);
+      })
     }
   };
 

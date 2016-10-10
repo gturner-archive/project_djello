@@ -10,7 +10,9 @@ function(_, ListsService, CardsService, ModalService, MembersService, ActivitySe
     },
     link: function(scope) {
 
-      scope.cards = CardsService.getCards();
+      CardsService.getCards().then(function(cards) {
+        scope.cards = cards;
+      });
       scope.updateList = {}
       scope.newCard = {}
       scope.updateList.title = scope.list.title
@@ -49,6 +51,7 @@ function(_, ListsService, CardsService, ModalService, MembersService, ActivitySe
           .then(function() {
             scope.newCard = {};
             scope.creatingCard = false;
+            console.log(scope.cards)
           })
       }
 
