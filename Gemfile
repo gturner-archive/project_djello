@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'angularjs-rails'
 #Angular CORS issues
 gem 'angular_rails_csrf'
+gem 'jquery-ui-rails'
 
 #Authentication
 gem 'devise'
